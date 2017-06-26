@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7F305CB8-7821-4625-A30C-7C40E790DA4D}</ProjectGuid>
+    <ProjectGuid>{74FC8EF5-7FC4-4BD6-8145-8226A8D88C8A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Domain.Test</RootNamespace>
-    <AssemblyName>Domain.Test</AssemblyName>
+    <RootNamespace>WebLibrary.Test</RootNamespace>
+    <AssemblyName>WebLibrary.Test</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
