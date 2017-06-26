@@ -150,6 +150,9 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\CheckLists\CheckListsAreaRegistration.cs" />
     <Compile Include="Areas\CheckLists\Controllers\CheckListController.cs" />
+    <Compile Include="Areas\CheckLists\Controllers\CheckListItemController.cs" />
+    <Compile Include="Areas\CheckLists\Models\CheckListItems\CheckListItemModel.cs" />
+    <Compile Include="Areas\CheckLists\Models\CheckLists\CheckListModel.cs" />
     <Compile Include="Areas\HelpPage\ApiDescriptionExtensions.cs" />
     <Compile Include="Areas\HelpPage\App_Start\HelpPageConfig.cs" />
     <Compile Include="Areas\HelpPage\Controllers\HelpController.cs" />
@@ -240,7 +243,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\CheckLists\Models\" />
     <Folder Include="Areas\CheckLists\Views\Shared\" />
     <Folder Include="Models\" />
   </ItemGroup>
