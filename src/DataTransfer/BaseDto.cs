@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
-namespace WebLibrary.Areas.CheckLists.Models.CheckLists
+namespace DataTransfer
 {
-    public class CheckListModel
+    public abstract class BaseDto<T>
     {
-        public int Id { get; set; }
+        public virtual T Id { get; set; }
         public string CreatedUsername { get; set; }
         public DateTime CreatedTimestamp { get; set; }
         public string ModifiedUsername { get; set; }
