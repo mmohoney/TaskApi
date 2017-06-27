@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="CheckListMap" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
+
+  <resultMaps>
+    <resultMap id="UserResultMap" class="UserDto">
+      <result property="Id" column="Id"/>
+      <result property="Username" column="Username"/>
+      <result property="FirstName" column="FirstName"/>
+      <result property="MiddleName" column="MiddleName"/>
+      <result property="LastName" column="LastName"/>
+      <result property="CreatedTimestamp" column="CreatedTimestamp"/>
+      <result property="CreatedUsername" column="CreatedUsername"/>
+      <result property="ModifiedTimestamp" column="ModifiedTimestamp"/>
+      <result property="ModifiedUsername" column="ModifiedUsername"/>
+    </resultMap>
+  </resultMaps>
+  
+  <statements>
+    <statement id="GetAllUsers" resultClass="UserDto" >
+      <![CDATA[
+        SELECT * 
+        FROM   [user] 
+      ]]>
+    </statement>
+  </statements>
+</sqlMap>

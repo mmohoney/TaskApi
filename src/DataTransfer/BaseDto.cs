@@ -8,6 +8,6 @@ namespace DataTransfer
         public string CreatedUsername { get; set; }
         public DateTime CreatedTimestamp { get; set; }
         public string ModifiedUsername { get; set; }
-        public DateTime ModifiedDate { get; set; }
+        public DateTime ModifiedTimestamp { get; set; }
     }
 }
