@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using DataAccess.Implementations.CheckLists;
 using Domain.CheckLists;
+using Service.CheckLists.Interfaces;
 
 namespace Service.CheckLists
 {
-    public class CheckListService
+    public class CheckListService : ICheckListService
     {
         private readonly CheckListDao _checkListDao = new CheckListDao();
 

@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Web.Http;
 using Domain.CheckLists;
-using Service.CheckLists;
+using Service.CheckLists.Interfaces;
 using WebLibrary.Areas.CheckLists.Models.CheckLists;
 
 namespace WebLibrary.Areas.CheckLists.Controllers
@@ -12,7 +12,16 @@ namespace WebLibrary.Areas.CheckLists.Controllers
     /// </summary>
     public class CheckListController : ApiController
     {
-        private readonly CheckListService _checkListService = new CheckListService();
+        private readonly ICheckListService _checkListService;
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="checkListService"></param>
+        public CheckListController(ICheckListService checkListService)
+        {
+            _checkListService = checkListService;
+        }
 
         /// <summary>
         /// Get all check lists for provided user id

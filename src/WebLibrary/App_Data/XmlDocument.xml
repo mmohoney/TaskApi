@@ -9,6 +9,12 @@
             Check list management API
             </summary>
         </member>
+        <member name="M:WebLibrary.Areas.CheckLists.Controllers.CheckListController.#ctor(Service.CheckLists.Interfaces.ICheckListService)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="checkListService"></param>
+        </member>
         <member name="M:WebLibrary.Areas.CheckLists.Controllers.CheckListController.GetAllCheckListsForUser(System.Int32)">
             <summary>
             Get all check lists for provided user id
@@ -519,6 +525,37 @@
             Initializes a new instance of the <see cref="T:WebLibrary.Areas.HelpPage.XmlDocumentationProvider"/> class.
             </summary>
             <param name="documentPath">The physical path to XML document.</param>
+        </member>
+        <member name="T:WebLibrary.DependencyResolution.StructureMapDependencyScope">
+            <summary>
+            The structure map dependency scope.
+            </summary>
+        </member>
+        <member name="T:WebLibrary.DependencyResolution.StructureMapWebApiDependencyResolver">
+            <summary>
+            The structure map dependency resolver.
+            </summary>
+        </member>
+        <member name="M:WebLibrary.DependencyResolution.StructureMapWebApiDependencyResolver.#ctor(StructureMap.IContainer)">
+            <summary>
+            Initializes a new instance of the <see cref="T:WebLibrary.DependencyResolution.StructureMapWebApiDependencyResolver"/> class.
+            </summary>
+            <param name="container">
+            The container.
+            </param>
+        </member>
+        <member name="M:WebLibrary.DependencyResolution.StructureMapWebApiDependencyResolver.BeginScope">
+            <summary>
+            The begin scope.
+            </summary>
+            <returns>
+            The System.Web.Http.Dependencies.IDependencyScope.
+            </returns>
+        </member>
+        <member name="T:WebLibrary.DependencyResolution.StructureMapWebApiDependencyScope">
+            <summary>
+            The structure map web api dependency scope.
+            </summary>
         </member>
     </members>
 </doc>

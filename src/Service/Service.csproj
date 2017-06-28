@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="StructureMap, Version=4.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\StructureMap.4.5.0\lib\net45\StructureMap.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -42,11 +45,11 @@
   <ItemGroup>
     <Compile Include="CheckLists\CheckListItemService.cs" />
     <Compile Include="CheckLists\CheckListService.cs" />
+    <Compile Include="CheckLists\Interfaces\ICheckListService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceRegistry.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="CheckLists\Interfaces\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\DataAccess\DataAccess.csproj">
       <Project>{89054c08-3b91-4a53-9f7c-1c2e80e92f55}</Project>
@@ -60,6 +63,9 @@
       <Project>{2790b7bb-924f-499e-9130-cffe7714b899}</Project>
       <Name>Domain</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
