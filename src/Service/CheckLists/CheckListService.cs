@@ -19,7 +19,7 @@ namespace Service.CheckLists
         public List<CheckListEntity> GetAllCheckListsForUser(int userId)
         {
             List<CheckListDto> checkLists = _checkListDao.GetAllCheckListsForUser(userId);
-            List<CheckListEntity> entities = checkLists.Select(c => CheckListEntity.FromDto(c)).ToList();
+            List<CheckListEntity> entities = checkLists.Select(CheckListEntity.FromDto).ToList();
             return entities;
         }
 

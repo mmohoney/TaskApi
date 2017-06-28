@@ -21,5 +21,13 @@ namespace DataAccess.Test
             var result = dao.GetAllUsers();
             Assert.IsNotNull(result);
         }
+
+        [Test]
+        public void GetAllCheckListsForUser()
+        {
+            var dao = new CheckListDao();
+            var result = dao.GetAllCheckListsForUser(1);
+            Assert.IsNotNull(result);
+        }
     }
 }
