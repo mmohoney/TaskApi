@@ -7,11 +7,6 @@ namespace DataAccess
         private static readonly object Lock = new object();
         private static ISqlMapper _sqlMapper;
 
-        static DbSqlMapper()
-        {
-            _sqlMapper = Mapper.Instance();
-        }
-
         public static ISqlMapper SqlMapper
         {
             get
