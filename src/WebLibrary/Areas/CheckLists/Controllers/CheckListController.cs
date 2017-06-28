@@ -15,7 +15,7 @@ namespace WebLibrary.Areas.CheckLists.Controllers
         private readonly ICheckListService _checkListService;
 
         /// <summary>
-        /// Constructor
+        /// Constructor using IoC
         /// </summary>
         /// <param name="checkListService"></param>
         public CheckListController(ICheckListService checkListService)

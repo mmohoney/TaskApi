@@ -11,7 +11,7 @@
         </member>
         <member name="M:WebLibrary.Areas.CheckLists.Controllers.CheckListController.#ctor(Service.CheckLists.Interfaces.ICheckListService)">
             <summary>
-            Constructor
+            Constructor using IoC
             </summary>
             <param name="checkListService"></param>
         </member>
