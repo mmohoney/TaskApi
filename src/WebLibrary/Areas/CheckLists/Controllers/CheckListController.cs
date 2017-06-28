@@ -1,39 +1,74 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
+using Domain.CheckLists;
+using Service.CheckLists;
+using WebLibrary.Areas.CheckLists.Models.CheckLists;
 
 namespace WebLibrary.Areas.CheckLists.Controllers
 {
+    /// <summary>
+    /// Check list management API
+    /// </summary>
     public class CheckListController : ApiController
     {
-        // GET: api/CheckList
-        public IEnumerable<string> Get()
+        private readonly CheckListService _checkListService = new CheckListService();
+
+        /// <summary>
+        /// Get all check lists for provided user id
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public List<CheckListModel> GetAllCheckListsForUser(int userId)
         {
-            return new string[] { "value1", "value2" };
+            List<CheckListEntity> checkLists = _checkListService.GetAllCheckListsForUser(userId);
+            List<CheckListModel> models = checkLists.Select(CheckListModel.FromDomain).ToList();
+            return models;
         }
 
-        // GET: api/CheckList/5
-        public string Get(int id)
+        /// <summary>
+        /// Get check list by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public CheckListModel Get(int id)
         {
-            return "value";
+            CheckListEntity checkList = _checkListService.GetCheckListById(id);
+            CheckListModel model = CheckListModel.FromDomain(checkList);
+            return model;
         }
 
-        // POST: api/CheckList
-        public void Post([FromBody]string value)
+        /// <summary>
+        /// Create the provided check list
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public CheckListModel Post(CheckListModel model)
         {
+            CheckListEntity checkList = _checkListService.CreateCheckList(new CheckListEntity());
+            CheckListModel resultModel = CheckListModel.FromDomain(checkList);
+            return resultModel;
         }
 
-        // PUT: api/CheckList/5
-        public void Put(int id, [FromBody]string value)
+        /// <summary>
+        /// Update the provided check list
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public CheckListModel Put(CheckListModel model)
         {
+            CheckListEntity checkList = _checkListService.UpdateCheckList(new CheckListEntity());
+            CheckListModel resultModel = CheckListModel.FromDomain(checkList);
+            return resultModel;
         }
 
-        // DELETE: api/CheckList/5
+        /// <summary>
+        /// Delete the provided check list by id
+        /// </summary>
+        /// <param name="id"></param>
         public void Delete(int id)
         {
+            _checkListService.DeleteCheckList(id);
         }
     }
 }
