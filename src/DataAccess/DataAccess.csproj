@@ -103,7 +103,9 @@
     </Compile>
     <Compile Include="Implementations\BaseDao.cs" />
     <Compile Include="Implementations\CheckLists\CheckListDao.cs" />
+    <Compile Include="Implementations\CheckLists\CheckListItemDao.cs" />
     <Compile Include="Implementations\CheckLists\Interfaces\ICheckListDao.cs" />
+    <Compile Include="Implementations\CheckLists\Interfaces\ICheckListItemDao.cs" />
     <Compile Include="Implementations\IBaseDao.cs" />
     <Compile Include="Implementations\Users\Interfaces\IUserDao.cs" />
     <Compile Include="Implementations\Users\UserDao.cs" />
@@ -114,6 +116,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="SqlMaps\CheckLists\CheckListItemMap.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <Content Include="TaskDb.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

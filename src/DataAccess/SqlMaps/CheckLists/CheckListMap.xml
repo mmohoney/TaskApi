@@ -67,12 +67,12 @@
       ]]>
     </update>
 
-    <update id="DeleteCheckListById" parameterClass="int" >
+    <delete id="DeleteCheckListById" parameterClass="int" >
       <![CDATA[
         UPDATE CHECK_LIST
            SET ACTIVE = 0
          WHERE ID = #value#
       ]]>
-    </update>
+    </delete>
   </statements>
 </sqlMap>

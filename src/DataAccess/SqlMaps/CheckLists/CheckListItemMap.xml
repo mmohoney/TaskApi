@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="CheckListItemMap" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
+
+  <resultMaps>
+    <resultMap id="CheckListItemResultMap" class="CheckListItemDto">
+      <result property="Id" column="ID"/>
+      <result property="CheckListId" column="CHECK_LIST_ID"/>
+      <result property="IsComplete" column="IS_COMPLETE"/>
+      <result property="Description" column="DESCRIPTION"/>
+      <result property="DueDate" column="DUE_DATE"/>
+    </resultMap>
+  </resultMaps>
+  
+  <statements>
+    <sql id="CheckListItemBaseSelect">
+      <![CDATA[
+        SELECT I.ID,
+               I.CHECK_LIST_ID,
+               I.IS_COMPLETE,
+               I.DESCRIPTION,
+               I.DUE_DATE
+        FROM CHECK_LIST_ITEM I
+      ]]>
+    </sql>
+
+    <select id="GetAllCheckLists" resultMap="CheckListResultMap" >
+      <include refid="CheckListBaseSelect" />
+      <![CDATA[
+       WHERE C.USER_ID = #value#  
+         AND C.ACTIVE = 1
+      ]]>
+    </select>
+
+    <select id="GetAllCheckListsByUserId" parameterClass="int" resultMap="CheckListResultMap" >
+      <include refid="CheckListBaseSelect" />
+      <![CDATA[
+       WHERE C.USER_ID = #value#  
+         AND C.ACTIVE = 1
+      ]]>
+    </select>
+
+    <select id="GetCheckListById" parameterClass="int" resultMap="CheckListResultMap" >
+      <include refid="CheckListBaseSelect" />
+      <![CDATA[
+       WHERE C.ID = #value#  
+      ]]>
+    </select>
+
+    <insert id="CreateCheckList" parameterClass="CheckListDto" >
+      <![CDATA[
+        INSERT INTO CHECK_LIST (USER_ID, DESCRIPTION, ACTIVE)
+        VALUES (#UserId#,
+                #Description#,
+                #Active#)
+      ]]>
+      <selectKey resultClass="int" type="post" property="Id" >
+        <![CDATA[
+          SELECT @@IDENTITY as value
+        ]]>
+      </selectKey>
+    </insert>
+
+    <update id="UpdateCheckList" parameterClass="CheckListDto" >
+      <![CDATA[
+        UPDATE CHECK_LIST
+           SET DESCRIPTION = #Description#,
+               ACTIVE = #Active#
+         WHERE ID = #Id#
+      ]]>
+    </update>
+
+    <delete id="DeleteCheckListById" parameterClass="int" >
+      <![CDATA[
+        UPDATE CHECK_LIST
+           SET ACTIVE = 0
+         WHERE ID = #value#
+      ]]>
+    </delete>
+  </statements>
+</sqlMap>
