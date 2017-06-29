@@ -5,6 +5,7 @@ using System.Web.Http.Results;
 using Domain.CheckLists;
 using NUnit.Framework;
 using Service.CheckLists.Interfaces;
+using StructureMap;
 using WebLibrary.Areas.CheckLists.Controllers;
 using WebLibrary.Areas.CheckLists.Models.CheckLists;
 
@@ -13,7 +14,15 @@ namespace WebLibrary.Test
     [TestFixture]
     public class CheckListControllerTests
     {
-        private readonly CheckListController _controller = new CheckListController(new CheckListServiceTest()) { Configuration = new HttpConfiguration() };
+        private IContainer _container;
+        private CheckListController _controller;
+
+        [OneTimeSetUp]
+        public void OneTimeSetUp()
+        {
+            _container = IoC.Initialize();
+            _controller = new CheckListController(_container.GetInstance<ICheckListService>()) { Configuration = new HttpConfiguration() };
+        }
 
         [Test]
         public void GetAllCheckListsForUser_Invalid()
@@ -113,7 +122,7 @@ namespace WebLibrary.Test
         }
 
 
-        class CheckListServiceTest : ICheckListService
+        public class CheckListControllerTestCheckListService : ICheckListService
         {
             public List<CheckListEntity> GetAllCheckListsForUserId(int userId)
             {

@@ -1,18 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using Domain.CheckLists;
 using Service.CheckLists.Interfaces;
 using WebLibrary.Areas.CheckLists.Models.CheckLists;
+using WebLibrary.Controllers;
 
 namespace WebLibrary.Areas.CheckLists.Controllers
 {
     /// <summary>
     /// Check list management API
     /// </summary>
-    public class CheckListController : ApiController
+    public class CheckListController : BaseApiController
     {
         private readonly ICheckListService _checkListService;
 
@@ -26,14 +25,14 @@ namespace WebLibrary.Areas.CheckLists.Controllers
         }
 
         /// <summary>
-        /// Get all check lists for provided user id
+        /// Get all active check lists for provided user id
         /// </summary>
         /// <param name="userId"></param>
         /// <returns></returns>
         public IHttpActionResult GetAllCheckListsForUser(int userId)
         {
             if (userId < 1)
-                return CreateErrorResponse("id must be greater than 0.");
+                return CreateErrorResponse("userId must be greater than 0.");
 
             List<CheckListEntity> checkLists = _checkListService.GetAllCheckListsForUserId(userId);
             List<CheckListModel> models = checkLists.Select(CheckListModel.FromDomain).ToList();
@@ -66,7 +65,7 @@ namespace WebLibrary.Areas.CheckLists.Controllers
             if (validationMessages.Any())
                 return CreateErrorResponse(validationMessages);
 
-            CheckListEntity checkList = _checkListService.CreateCheckList(new CheckListEntity());
+            CheckListEntity checkList = _checkListService.CreateCheckList(model.ToDomain());
             CheckListModel resultModel = CheckListModel.FromDomain(checkList);
             return Ok(resultModel);
         }
@@ -82,7 +81,7 @@ namespace WebLibrary.Areas.CheckLists.Controllers
             if (validationMessages.Any())
                 return CreateErrorResponse(validationMessages);
 
-            CheckListEntity checkList = _checkListService.UpdateCheckList(new CheckListEntity());
+            CheckListEntity checkList = _checkListService.UpdateCheckList(model.ToDomain());
             CheckListModel resultModel = CheckListModel.FromDomain(checkList);
             return Ok(resultModel);
         }
@@ -99,16 +98,6 @@ namespace WebLibrary.Areas.CheckLists.Controllers
             _checkListService.DeleteCheckListById(id);
 
             return Ok();
-        }
-
-        private IHttpActionResult CreateErrorResponse(string error)
-        {
-            return CreateErrorResponse(new List<string> {error});
-        }
-
-        private IHttpActionResult CreateErrorResponse(List<string> errors)
-        {
-            return Content(HttpStatusCode.BadRequest, errors);
         }
     }
 }

@@ -72,6 +72,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CheckListControllerTests.cs" />
+    <Compile Include="CheckListItemControllerTests.cs" />
+    <Compile Include="WebLibraryTestDefaultRegistry.cs" />
+    <Compile Include="IoC.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

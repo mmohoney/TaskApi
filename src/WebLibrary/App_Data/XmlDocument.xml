@@ -17,7 +17,7 @@
         </member>
         <member name="M:WebLibrary.Areas.CheckLists.Controllers.CheckListController.GetAllCheckListsForUser(System.Int32)">
             <summary>
-            Get all check lists for provided user id
+            Get all active check lists for provided user id
             </summary>
             <param name="userId"></param>
             <returns></returns>
@@ -48,6 +48,31 @@
             Delete the provided check list by id
             </summary>
             <param name="id"></param>
+        </member>
+        <member name="T:WebLibrary.Areas.CheckLists.Controllers.CheckListItemController">
+            <summary>
+            Check list item management API
+            </summary>
+        </member>
+        <member name="M:WebLibrary.Areas.CheckLists.Controllers.CheckListItemController.#ctor(Service.CheckLists.Interfaces.ICheckListItemService)">
+            <summary>
+            Constructor using IoC
+            </summary>
+            <param name="checkListItemService"></param>
+        </member>
+        <member name="M:WebLibrary.Areas.CheckLists.Controllers.CheckListItemController.GetAllCheckListItemsByCheckListId(System.Int32)">
+            <summary>
+            Get all active check list items for provided check list id
+            </summary>
+            <param name="checkListId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebLibrary.Areas.CheckLists.Controllers.CheckListItemController.GetCheckListItemById(System.Int32)">
+            <summary>
+            Get check list item by id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
         </member>
         <member name="M:WebLibrary.Areas.HelpPage.ApiDescriptionExtensions.GetFriendlyId(System.Web.Http.Description.ApiDescription)">
             <summary>
