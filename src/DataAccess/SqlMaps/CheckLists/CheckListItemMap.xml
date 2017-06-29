@@ -11,7 +11,7 @@
     </resultMap>
   </resultMaps>
   
-  <statements>
+  <!--<statements>
     <sql id="CheckListItemBaseSelect">
       <![CDATA[
         SELECT I.ID,
@@ -76,5 +76,5 @@
          WHERE ID = #value#
       ]]>
     </delete>
-  </statements>
+  </statements>-->
 </sqlMap>
