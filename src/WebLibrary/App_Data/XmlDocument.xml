@@ -22,28 +22,28 @@
             <param name="userId"></param>
             <returns></returns>
         </member>
-        <member name="M:WebLibrary.Areas.CheckLists.Controllers.CheckListController.Get(System.Int32)">
+        <member name="M:WebLibrary.Areas.CheckLists.Controllers.CheckListController.GetCheckListById(System.Int32)">
             <summary>
             Get check list by id
             </summary>
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:WebLibrary.Areas.CheckLists.Controllers.CheckListController.Post(WebLibrary.Areas.CheckLists.Models.CheckLists.CheckListModel)">
+        <member name="M:WebLibrary.Areas.CheckLists.Controllers.CheckListController.CreateCheckList(WebLibrary.Areas.CheckLists.Models.CheckLists.CheckListModel)">
             <summary>
             Create the provided check list
             </summary>
             <param name="model"></param>
             <returns></returns>
         </member>
-        <member name="M:WebLibrary.Areas.CheckLists.Controllers.CheckListController.Put(WebLibrary.Areas.CheckLists.Models.CheckLists.CheckListModel)">
+        <member name="M:WebLibrary.Areas.CheckLists.Controllers.CheckListController.UpdateCheckList(WebLibrary.Areas.CheckLists.Models.CheckLists.CheckListModel)">
             <summary>
             Update the provided check list
             </summary>
             <param name="model"></param>
             <returns></returns>
         </member>
-        <member name="M:WebLibrary.Areas.CheckLists.Controllers.CheckListController.Delete(System.Int32)">
+        <member name="M:WebLibrary.Areas.CheckLists.Controllers.CheckListController.DeleteCheckListById(System.Int32)">
             <summary>
             Delete the provided check list by id
             </summary>

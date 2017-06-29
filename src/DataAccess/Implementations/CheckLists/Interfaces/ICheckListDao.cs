@@ -6,7 +6,7 @@ namespace DataAccess.Implementations.CheckLists.Interfaces
     public interface ICheckListDao : IBaseDao
     {
         List<CheckListDto> GetAllCheckLists();
-        List<CheckListDto> GetAllCheckListsByUserId(int id);
+        List<CheckListDto> GetAllCheckListsForUserId(int userId);
         CheckListDto GetCheckListById(int id);
         void CreateCheckList(CheckListDto dto);
         void UpdateCheckList(CheckListDto dto);

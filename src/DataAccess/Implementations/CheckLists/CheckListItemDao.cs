@@ -12,32 +12,32 @@ namespace DataAccess.Implementations.CheckLists
     {
         public List<CheckListItemDto> GetAllCheckListItems()
         {
-            throw new NotImplementedException();
+            return DbSqlMapper.SqlMapper.QueryForList<CheckListItemDto>("CheckListItemMap.GetAllCheckListItems", null).ToList();
         }
 
-        public List<CheckListItemDto> GetAllCheckListItemsByCheckListId(int id)
+        public List<CheckListItemDto> GetAllCheckListItemsByCheckListId(int checkListId)
         {
-            throw new NotImplementedException();
+            return DbSqlMapper.SqlMapper.QueryForList<CheckListItemDto>("CheckListItemMap.GetAllCheckListItemsByCheckListId", checkListId).ToList();
         }
 
         public CheckListItemDto GetCheckListItemById(int id)
         {
-            throw new NotImplementedException();
+            return DbSqlMapper.SqlMapper.QueryForObject<CheckListItemDto>("CheckListItemMap.GetCheckListItemById", id);
         }
 
         public void CreateCheckListItem(CheckListItemDto dto)
         {
-            throw new NotImplementedException();
+            DbSqlMapper.SqlMapper.Insert("CheckListItemMap.CreateCheckListItem", dto);
         }
 
         public void UpdateCheckListItem(CheckListItemDto dto)
         {
-            throw new NotImplementedException();
+            DbSqlMapper.SqlMapper.Update("CheckListItemMap.UpdateCheckListItem", dto);
         }
 
         public void DeleteCheckListItemById(int id)
         {
-            throw new NotImplementedException();
+            DbSqlMapper.SqlMapper.Delete("CheckListItemMap.DeleteCheckListItemById", id);
         }
     }
 }

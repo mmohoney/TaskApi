@@ -16,35 +16,35 @@ namespace Service.CheckLists
             _checkListDao = checkListDao;
         }
 
-        public List<CheckListEntity> GetAllCheckListsForUser(int userId)
+        public List<CheckListEntity> GetAllCheckListsForUserId(int userId)
         {
-            List<CheckListDto> checkLists = _checkListDao.GetAllCheckListsByUserId(userId);
+            List<CheckListDto> checkLists = _checkListDao.GetAllCheckListsForUserId(userId);
             List<CheckListEntity> entities = checkLists.Select(CheckListEntity.FromDto).ToList();
             return entities;
         }
 
-        public CheckListEntity GetCheckListById(int checkListId)
+        public CheckListEntity GetCheckListById(int id)
         {
-            CheckListDto checkList = _checkListDao.GetCheckListById(checkListId);
+            CheckListDto checkList = _checkListDao.GetCheckListById(id);
             CheckListEntity entity = CheckListEntity.FromDto(checkList);
             return entity;
         }
 
-        public CheckListEntity CreateCheckList(CheckListEntity entity)
+        public CheckListEntity CreateCheckList(CheckListEntity checkList)
         {
-            CheckListDto dto = entity.ToDto();
+            CheckListDto dto = checkList.ToDto();
             _checkListDao.CreateCheckList(dto);
             return GetCheckListById(dto.Id);
         }
 
-        public CheckListEntity UpdateCheckList(CheckListEntity entity)
+        public CheckListEntity UpdateCheckList(CheckListEntity checkList)
         {
-            CheckListDto dto = entity.ToDto();
+            CheckListDto dto = checkList.ToDto();
             _checkListDao.UpdateCheckList(dto);
             return GetCheckListById(dto.Id);
         }
 
-        public void DeleteCheckList(int id)
+        public void DeleteCheckListById(int id)
         {
             _checkListDao.DeleteCheckListById(id);
         }

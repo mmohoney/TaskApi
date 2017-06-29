@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="CheckLists\CheckListItemService.cs" />
     <Compile Include="CheckLists\CheckListService.cs" />
+    <Compile Include="CheckLists\Interfaces\ICheckListItemService.cs" />
     <Compile Include="CheckLists\Interfaces\ICheckListService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceRegistry.cs" />

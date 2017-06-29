@@ -24,12 +24,11 @@
     <select id="GetAllCheckLists" resultMap="CheckListResultMap" >
       <include refid="CheckListBaseSelect" />
       <![CDATA[
-       WHERE C.USER_ID = #value#  
-         AND C.ACTIVE = 1
+       WHERE C.ACTIVE = 1
       ]]>
     </select>
 
-    <select id="GetAllCheckListsByUserId" parameterClass="int" resultMap="CheckListResultMap" >
+    <select id="GetAllCheckListsForUserId" parameterClass="int" resultMap="CheckListResultMap" >
       <include refid="CheckListBaseSelect" />
       <![CDATA[
        WHERE C.USER_ID = #value#  

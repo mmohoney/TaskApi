@@ -5,10 +5,10 @@ namespace Service.CheckLists.Interfaces
 {
     public interface ICheckListService
     {
-        List<CheckListEntity> GetAllCheckListsForUser(int userId);
-        CheckListEntity GetCheckListById(int checkListId);
-        CheckListEntity CreateCheckList(CheckListEntity entity);
-        CheckListEntity UpdateCheckList(CheckListEntity entity);
-        void DeleteCheckList(int id);
+        List<CheckListEntity> GetAllCheckListsForUserId(int userId);
+        CheckListEntity GetCheckListById(int id);
+        CheckListEntity CreateCheckList(CheckListEntity checkList);
+        CheckListEntity UpdateCheckList(CheckListEntity checkList);
+        void DeleteCheckListById(int id);
     }
 }

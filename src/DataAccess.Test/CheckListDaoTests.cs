@@ -54,7 +54,7 @@ namespace DataAccess.Test
                 checkListDao.CreateCheckList(checkListDto);
                 Assert.IsTrue(checkListDto.Id > 0);
 
-                var dbCheckListDtos = checkListDao.GetAllCheckListsByUserId(checkListDto.UserId);
+                var dbCheckListDtos = checkListDao.GetAllCheckListsForUserId(checkListDto.UserId);
                 Assert.IsNotEmpty(dbCheckListDtos);
                 Assert.IsNotNull(dbCheckListDtos.Find(d => d.Id == checkListDto.Id));
             }, false);

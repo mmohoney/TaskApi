@@ -265,6 +265,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\CheckLists\Views\Shared\" />
+    <Folder Include="Filters\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
@@ -283,6 +284,10 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DataTransfer\DataTransfer.csproj">
+      <Project>{551142C5-16EA-4D7E-A960-AEDD8BB1D7DC}</Project>
+      <Name>DataTransfer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{2790b7bb-924f-499e-9130-cffe7714b899}</Project>
       <Name>Domain</Name>

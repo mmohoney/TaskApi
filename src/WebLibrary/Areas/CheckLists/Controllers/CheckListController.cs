@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Web.Http;
 using Domain.CheckLists;
 using Service.CheckLists.Interfaces;
@@ -28,11 +30,14 @@ namespace WebLibrary.Areas.CheckLists.Controllers
         /// </summary>
         /// <param name="userId"></param>
         /// <returns></returns>
-        public List<CheckListModel> GetAllCheckListsForUser(int userId)
+        public IHttpActionResult GetAllCheckListsForUser(int userId)
         {
-            List<CheckListEntity> checkLists = _checkListService.GetAllCheckListsForUser(userId);
+            if (userId < 1)
+                return CreateErrorResponse("id must be greater than 0.");
+
+            List<CheckListEntity> checkLists = _checkListService.GetAllCheckListsForUserId(userId);
             List<CheckListModel> models = checkLists.Select(CheckListModel.FromDomain).ToList();
-            return models;
+            return Ok(models);
         }
 
         /// <summary>
@@ -40,11 +45,14 @@ namespace WebLibrary.Areas.CheckLists.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public CheckListModel Get(int id)
+        public IHttpActionResult GetCheckListById(int id)
         {
+            if (id < 1)
+                return CreateErrorResponse("id must be greater than 0.");
+
             CheckListEntity checkList = _checkListService.GetCheckListById(id);
             CheckListModel model = CheckListModel.FromDomain(checkList);
-            return model;
+            return Ok(model);
         }
 
         /// <summary>
@@ -52,11 +60,15 @@ namespace WebLibrary.Areas.CheckLists.Controllers
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public CheckListModel Post(CheckListModel model)
+        public IHttpActionResult CreateCheckList(CheckListModel model)
         {
+            List<string> validationMessages = model.ValidateCreate();
+            if (validationMessages.Any())
+                return CreateErrorResponse(validationMessages);
+
             CheckListEntity checkList = _checkListService.CreateCheckList(new CheckListEntity());
             CheckListModel resultModel = CheckListModel.FromDomain(checkList);
-            return resultModel;
+            return Ok(resultModel);
         }
 
         /// <summary>
@@ -64,20 +76,39 @@ namespace WebLibrary.Areas.CheckLists.Controllers
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public CheckListModel Put(CheckListModel model)
+        public IHttpActionResult UpdateCheckList(CheckListModel model)
         {
+            List<string> validationMessages = model.ValidateUpdate();
+            if (validationMessages.Any())
+                return CreateErrorResponse(validationMessages);
+
             CheckListEntity checkList = _checkListService.UpdateCheckList(new CheckListEntity());
             CheckListModel resultModel = CheckListModel.FromDomain(checkList);
-            return resultModel;
+            return Ok(resultModel);
         }
 
         /// <summary>
         /// Delete the provided check list by id
         /// </summary>
         /// <param name="id"></param>
-        public void Delete(int id)
+        public IHttpActionResult DeleteCheckListById(int id)
         {
-            _checkListService.DeleteCheckList(id);
+            if (id < 1)
+                return CreateErrorResponse("id must be greater than 0.");
+
+            _checkListService.DeleteCheckListById(id);
+
+            return Ok();
+        }
+
+        private IHttpActionResult CreateErrorResponse(string error)
+        {
+            return CreateErrorResponse(new List<string> {error});
+        }
+
+        private IHttpActionResult CreateErrorResponse(List<string> errors)
+        {
+            return Content(HttpStatusCode.BadRequest, errors);
         }
     }
 }

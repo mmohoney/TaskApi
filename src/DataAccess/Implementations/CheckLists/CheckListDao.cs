@@ -12,9 +12,9 @@ namespace DataAccess.Implementations.CheckLists
             return DbSqlMapper.SqlMapper.QueryForList<CheckListDto>("CheckListMap.GetAllCheckLists", null).ToList();
         }
 
-        public List<CheckListDto> GetAllCheckListsByUserId(int id)
+        public List<CheckListDto> GetAllCheckListsForUserId(int userId)
         {
-            return DbSqlMapper.SqlMapper.QueryForList<CheckListDto>("CheckListMap.GetAllCheckListsByUserId", id).ToList();
+            return DbSqlMapper.SqlMapper.QueryForList<CheckListDto>("CheckListMap.GetAllCheckListsForUserId", userId).ToList();
         }
 
         public CheckListDto GetCheckListById(int id)

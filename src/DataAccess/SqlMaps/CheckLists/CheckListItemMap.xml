@@ -8,49 +8,52 @@
       <result property="IsComplete" column="IS_COMPLETE"/>
       <result property="Description" column="DESCRIPTION"/>
       <result property="DueDate" column="DUE_DATE"/>
+      <result property="Active" column="ACTIVE"/>
     </resultMap>
   </resultMaps>
   
-  <!--<statements>
+  <statements>
     <sql id="CheckListItemBaseSelect">
       <![CDATA[
         SELECT I.ID,
                I.CHECK_LIST_ID,
                I.IS_COMPLETE,
                I.DESCRIPTION,
-               I.DUE_DATE
+               I.DUE_DATE,
+               I.ACTIVE
         FROM CHECK_LIST_ITEM I
       ]]>
     </sql>
 
-    <select id="GetAllCheckLists" resultMap="CheckListResultMap" >
-      <include refid="CheckListBaseSelect" />
+    <select id="GetAllCheckListItems" resultMap="CheckListItemResultMap" >
+      <include refid="CheckListItemBaseSelect" />
       <![CDATA[
-       WHERE C.USER_ID = #value#  
-         AND C.ACTIVE = 1
+       WHERE I.ACTIVE = 1
       ]]>
     </select>
 
-    <select id="GetAllCheckListsByUserId" parameterClass="int" resultMap="CheckListResultMap" >
-      <include refid="CheckListBaseSelect" />
+    <select id="GetAllCheckListItemsByCheckListId" parameterClass="int" resultMap="CheckListItemResultMap" >
+      <include refid="CheckListItemBaseSelect" />
       <![CDATA[
-       WHERE C.USER_ID = #value#  
-         AND C.ACTIVE = 1
+       WHERE I.CHECK_LIST_ID = #value#  
+         AND I.ACTIVE = 1
       ]]>
     </select>
 
-    <select id="GetCheckListById" parameterClass="int" resultMap="CheckListResultMap" >
-      <include refid="CheckListBaseSelect" />
+    <select id="GetCheckListItemById" parameterClass="int" resultMap="CheckListItemResultMap" >
+      <include refid="CheckListItemBaseSelect" />
       <![CDATA[
-       WHERE C.ID = #value#  
+       WHERE I.ID = #value#  
       ]]>
     </select>
 
-    <insert id="CreateCheckList" parameterClass="CheckListDto" >
+    <insert id="CreateCheckListItem" parameterClass="CheckListItemDto" >
       <![CDATA[
-        INSERT INTO CHECK_LIST (USER_ID, DESCRIPTION, ACTIVE)
-        VALUES (#UserId#,
+        INSERT INTO CHECK_LIST_ITEM (CHECK_LIST_ID, IS_COMPLETE, DESCRIPTION, DUE_DATE, ACTIVE)
+        VALUES (#CheckListId#,
+                #IsComplete#,
                 #Description#,
+                #DueDate#,
                 #Active#)
       ]]>
       <selectKey resultClass="int" type="post" property="Id" >
@@ -60,21 +63,23 @@
       </selectKey>
     </insert>
 
-    <update id="UpdateCheckList" parameterClass="CheckListDto" >
+    <update id="UpdateCheckListItem" parameterClass="CheckListItemDto" >
       <![CDATA[
-        UPDATE CHECK_LIST
+        UPDATE CHECK_LIST_ITEM
            SET DESCRIPTION = #Description#,
+               IS_COMPLETE = #IsComplete#,
+               DUE_DATE = #DueDate#,
                ACTIVE = #Active#
          WHERE ID = #Id#
       ]]>
     </update>
 
-    <delete id="DeleteCheckListById" parameterClass="int" >
+    <delete id="DeleteCheckListItemById" parameterClass="int" >
       <![CDATA[
-        UPDATE CHECK_LIST
+        UPDATE CHECK_LIST_ITEM
            SET ACTIVE = 0
          WHERE ID = #value#
       ]]>
     </delete>
-  </statements>-->
+  </statements>
 </sqlMap>
