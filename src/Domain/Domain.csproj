@@ -46,7 +46,7 @@
     <Compile Include="BaseEntity.cs" />
     <Compile Include="CheckLists\CheckListEntity.cs" />
     <Compile Include="CheckLists\CheckListItemEntity.cs" />
-    <Compile Include="CheckLists\UserEntity.cs" />
+    <Compile Include="Users\UserEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

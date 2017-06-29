@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using DataAccess.Implementations.Users.Interfaces;
-using DataTransfer.CheckLists;
+using DataTransfer.Users;
 
 namespace DataAccess.Implementations.Users
 {

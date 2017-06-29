@@ -3,13 +3,13 @@ using DataTransfer.CheckLists;
 
 namespace DataAccess.Implementations.CheckLists.Interfaces
 {
-    public interface ICheckListDao
+    public interface ICheckListDao : IBaseDao
     {
-        List<UserDto> GetAllUsers();
-        List<CheckListDto> GetAllCheckListsForUser(int userId);
-        CheckListDto GetCheckListById(int checkListId);
-        CheckListDto CreateCheckList(CheckListDto entity);
-        CheckListDto UpdateCheckList(CheckListDto entity);
-        void DeleteCheckList(int id);
+        List<CheckListDto> GetAllCheckLists();
+        List<CheckListDto> GetAllCheckListsByUserId(int id);
+        CheckListDto GetCheckListById(int id);
+        void CreateCheckList(CheckListDto dto);
+        void UpdateCheckList(CheckListDto dto);
+        void DeleteCheckListById(int id);
     }
 }

@@ -5,36 +5,36 @@ using DataTransfer.CheckLists;
 
 namespace DataAccess.Implementations.CheckLists
 {
-    public class CheckListDao : ICheckListDao
+    public class CheckListDao : BaseDao, ICheckListDao
     {
-        public List<UserDto> GetAllUsers()
+        public List<CheckListDto> GetAllCheckLists()
         {
-            return DbSqlMapper.SqlMapper.QueryForList<UserDto>("CheckListMap.GetAllUsers", null).ToList();
+            return DbSqlMapper.SqlMapper.QueryForList<CheckListDto>("CheckListMap.GetAllCheckLists", null).ToList();
         }
 
-        public List<CheckListDto> GetAllCheckListsForUser(int userId)
+        public List<CheckListDto> GetAllCheckListsByUserId(int id)
         {
-            return DbSqlMapper.SqlMapper.QueryForList<CheckListDto>("CheckListMap.GetAllCheckListsForUser", userId).ToList();
+            return DbSqlMapper.SqlMapper.QueryForList<CheckListDto>("CheckListMap.GetAllCheckListsByUserId", id).ToList();
         }
 
-        public CheckListDto GetCheckListById(int checkListId)
+        public CheckListDto GetCheckListById(int id)
         {
-            return new CheckListDto();
+            return DbSqlMapper.SqlMapper.QueryForObject<CheckListDto>("CheckListMap.GetCheckListById", id);
         }
 
-        public CheckListDto CreateCheckList(CheckListDto entity)
+        public void CreateCheckList(CheckListDto dto)
         {
-            return new CheckListDto();
+            DbSqlMapper.SqlMapper.Insert("CheckListMap.CreateCheckList", dto);
         }
 
-        public CheckListDto UpdateCheckList(CheckListDto entity)
+        public void UpdateCheckList(CheckListDto dto)
         {
-            return new CheckListDto();
+            DbSqlMapper.SqlMapper.Update("CheckListMap.UpdateCheckList", dto);
         }
 
-        public void DeleteCheckList(int id)
+        public void DeleteCheckListById(int id)
         {
-
+            DbSqlMapper.SqlMapper.Delete("CheckListMap.DeleteCheckListById", id);
         }
     }
 }

@@ -46,7 +46,7 @@
     <Compile Include="BaseDto.cs" />
     <Compile Include="CheckLists\CheckListItemDto.cs" />
     <Compile Include="CheckLists\CheckListDto.cs" />
-    <Compile Include="CheckLists\UserDto.cs" />
+    <Compile Include="Users\UserDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

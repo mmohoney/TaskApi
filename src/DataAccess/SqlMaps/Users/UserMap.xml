@@ -13,7 +13,7 @@
   </resultMaps>
   
   <statements>
-    <select id="GetAllUsers" resultMap="UserResultMap" >
+    <sql id="UserBaseSelect">
       <![CDATA[
         SELECT U.ID,
                U.USERNAME,
@@ -23,17 +23,15 @@
                U.EMAIL
         FROM USERS U
       ]]>
+    </sql>
+    
+    <select id="GetAllUsers" resultMap="UserResultMap" >
+      <include refid="UserBaseSelect" />
     </select>
 
     <select id="GetUserById" parameterClass="int" resultMap="UserResultMap" >
+      <include refid="UserBaseSelect" />
       <![CDATA[
-        SELECT U.ID,
-               U.USERNAME,
-               U.FIRST_NAME,
-               U.MIDDLE_NAME,
-               U.LAST_NAME,
-               U.EMAIL
-        FROM USERS U  
        WHERE U.ID = #value#  
       ]]>
     </select>

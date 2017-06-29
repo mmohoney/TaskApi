@@ -1,6 +1,7 @@
 ﻿using System;
 using DataAccess.Implementations.Users;
 using DataTransfer.CheckLists;
+using DataTransfer.Users;
 using NUnit.Framework;
 
 namespace DataAccess.Test
@@ -8,7 +9,7 @@ namespace DataAccess.Test
     [TestFixture]
     public class UserDaoTests
     {
-        private readonly Random _random = new Random(100);
+        private readonly Random _random = new Random();
 
         private UserDto GetNewUser()
         {

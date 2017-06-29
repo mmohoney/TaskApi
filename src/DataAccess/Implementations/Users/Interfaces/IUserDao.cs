@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using DataTransfer.CheckLists;
+using DataTransfer.Users;
 
 namespace DataAccess.Implementations.Users.Interfaces
 {

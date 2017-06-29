@@ -2,47 +2,77 @@
 <sqlMap namespace="CheckListMap" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
 
   <resultMaps>
-    <resultMap id="UserResultMap" class="UserDto">
-      <result property="Id" column="Id"/>
-      <result property="Username" column="Username"/>
-      <result property="FirstName" column="FirstName"/>
-      <result property="MiddleName" column="MiddleName"/>
-      <result property="LastName" column="LastName"/>
-      <result property="CreatedTimestamp" column="CreatedTimestamp"/>
-      <result property="CreatedUsername" column="CreatedUsername"/>
-      <result property="ModifiedTimestamp" column="ModifiedTimestamp"/>
-      <result property="ModifiedUsername" column="ModifiedUsername"/>
-    </resultMap>
-
     <resultMap id="CheckListResultMap" class="CheckListDto">
       <result property="Id" column="ID"/>
       <result property="UserId" column="USER_ID"/>
-      <result property="CreatedTimestamp" column="CREATED_TIMESTAMP"/>
-      <result property="CreatedUsername" column="CREATED_USER_ID"/>
-      <result property="ModifiedTimestamp" column="MODIFIED_TIMESTAMP"/>
-      <result property="ModifiedUsername" column="MODIFIED_USER_ID"/>
+      <result property="Description" column="DESCRIPTION"/>
+      <result property="Active" column="ACTIVE"/>
     </resultMap>
   </resultMaps>
   
   <statements>
-    <statement id="GetAllUsers" resultClass="UserDto" >
-      <![CDATA[
-        SELECT * 
-        FROM   [user] 
-      ]]>
-    </statement>
-
-    <select id="GetAllCheckListsForUser" parameterClass="int" resultMap="CheckListResultMap">
+    <sql id="CheckListBaseSelect">
       <![CDATA[
         SELECT C.ID,
-	             C.USER_ID,
-	             C.CREATED_TIMESTAMP,
-	             C.CREATED_USER_ID,
-	             C.MODIFIED_TIMESTAMP,
-	             C.MODIFIED_USER_ID
-          FROM CHECK_LIST C
-         WHERE C.USER_ID = 1
+               C.USER_ID,
+               C.DESCRIPTION,
+               C.ACTIVE
+        FROM CHECK_LIST C
+      ]]>
+    </sql>
+
+    <select id="GetAllCheckLists" resultMap="CheckListResultMap" >
+      <include refid="CheckListBaseSelect" />
+      <![CDATA[
+       WHERE C.USER_ID = #value#  
+         AND C.ACTIVE = 1
       ]]>
     </select>
+
+    <select id="GetAllCheckListsByUserId" parameterClass="int" resultMap="CheckListResultMap" >
+      <include refid="CheckListBaseSelect" />
+      <![CDATA[
+       WHERE C.USER_ID = #value#  
+         AND C.ACTIVE = 1
+      ]]>
+    </select>
+
+    <select id="GetCheckListById" parameterClass="int" resultMap="CheckListResultMap" >
+      <include refid="CheckListBaseSelect" />
+      <![CDATA[
+       WHERE C.ID = #value#  
+      ]]>
+    </select>
+
+    <insert id="CreateCheckList" parameterClass="CheckListDto" >
+      <![CDATA[
+        INSERT INTO CHECK_LIST (USER_ID, DESCRIPTION, ACTIVE)
+        VALUES (#UserId#,
+                #Description#,
+                #Active#)
+      ]]>
+      <selectKey resultClass="int" type="post" property="Id" >
+        <![CDATA[
+          SELECT @@IDENTITY as value
+        ]]>
+      </selectKey>
+    </insert>
+
+    <update id="UpdateCheckList" parameterClass="CheckListDto" >
+      <![CDATA[
+        UPDATE CHECK_LIST
+           SET DESCRIPTION = #Description#,
+               ACTIVE = #Active#
+         WHERE ID = #Id#
+      ]]>
+    </update>
+
+    <update id="DeleteCheckListById" parameterClass="int" >
+      <![CDATA[
+        UPDATE CHECK_LIST
+           SET ACTIVE = 0
+         WHERE ID = #value#
+      ]]>
+    </update>
   </statements>
 </sqlMap>
