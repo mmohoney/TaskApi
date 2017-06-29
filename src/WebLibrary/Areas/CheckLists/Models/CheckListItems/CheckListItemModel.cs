@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Domain.CheckLists;
 
 namespace WebLibrary.Areas.CheckLists.Models.CheckListItems
@@ -36,6 +37,30 @@ namespace WebLibrary.Areas.CheckLists.Models.CheckListItems
                 DueDate = DueDate,
                 Active = Active
             };
+        }
+
+        public List<string> ValidateCreate()
+        {
+            List<string> errors = new List<string>();
+            if (Id > 0)
+                errors.Add("Cannot create new check list item when Id is greater than 0.");
+
+            if (CheckListId < 1)
+                errors.Add("Cannot create new check list item when CheckListId is less than 1.");
+
+            if (Active == false)
+                errors.Add("Cannot create new check list item when Active is false.");
+
+            return errors;
+        }
+
+        public List<string> ValidateUpdate()
+        {
+            List<string> errors = new List<string>();
+            if (Id < 1)
+                errors.Add("Cannot update check list when Id is less than 1.");
+
+            return errors;
         }
     }
 }

@@ -37,7 +37,7 @@ namespace Service.CheckLists
             return GetCheckListItemById(dto.Id);
         }
 
-        public CheckListItemEntity UpdateCheckList(CheckListItemEntity checkListItem)
+        public CheckListItemEntity UpdateCheckListItem(CheckListItemEntity checkListItem)
         {
             CheckListItemDto dto = checkListItem.ToDto();
             _checkListItemDao.UpdateCheckListItem(dto);

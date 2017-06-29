@@ -158,13 +158,8 @@ namespace WebLibrary.Test
 
             public CheckListEntity CreateCheckList(CheckListEntity checkList)
             {
-                return new CheckListEntity()
-                {
-                    Id = 4,
-                    UserId = 1,
-                    Description = "Description",
-                    Active = true,
-                };
+                checkList.Id = 4;
+                return checkList;
             }
 
             public CheckListEntity UpdateCheckList(CheckListEntity checkList)

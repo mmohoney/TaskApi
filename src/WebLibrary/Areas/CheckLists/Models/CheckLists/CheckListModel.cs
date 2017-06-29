@@ -39,7 +39,7 @@ namespace WebLibrary.Areas.CheckLists.Models.CheckLists
                 errors.Add("Cannot create new check list when Id is greater than 0.");
 
             if (UserId < 1)
-                errors.Add("Cannot create new check list when UserId is less than 0.");
+                errors.Add("Cannot create new check list when UserId is less than 1.");
 
             if (Active == false)
                 errors.Add("Cannot create new check list when Active is false.");

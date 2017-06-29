@@ -8,7 +8,7 @@ namespace Service.CheckLists.Interfaces
         List<CheckListItemEntity> GetAllCheckListItemsByCheckListId(int checkListId);
         CheckListItemEntity GetCheckListItemById(int id);
         CheckListItemEntity CreateCheckListItem(CheckListItemEntity checkListItem);
-        CheckListItemEntity UpdateCheckList(CheckListItemEntity checkListItem);
+        CheckListItemEntity UpdateCheckListItem(CheckListItemEntity checkListItem);
         void DeleteCheckListItemById(int id);
     }
 }

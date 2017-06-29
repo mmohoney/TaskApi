@@ -28,7 +28,8 @@ namespace WebLibrary.Areas.HelpPage.Controllers
         public ActionResult Index()
         {
             ViewBag.DocumentationProvider = Configuration.Services.GetDocumentationProvider();
-            return View(Configuration.Services.GetApiExplorer().ApiDescriptions);
+            var test = Configuration.Services.GetApiExplorer().ApiDescriptions;
+            return View(test);
         }
 
         public ActionResult Api(string apiId)

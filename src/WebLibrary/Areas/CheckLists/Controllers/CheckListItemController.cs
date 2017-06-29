@@ -57,5 +57,51 @@ namespace WebLibrary.Areas.CheckLists.Controllers
             CheckListItemModel model = CheckListItemModel.FromDomain(checkListItem);
             return Ok(model);
         }
+
+        /// <summary>
+        /// Create the provided check list item
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public IHttpActionResult CreateCheckListItem(CheckListItemModel model)
+        {
+            List<string> validationMessages = model.ValidateCreate();
+            if (validationMessages.Any())
+                return CreateErrorResponse(validationMessages);
+
+            CheckListItemEntity checkListItem = _checkListItemService.CreateCheckListItem(model.ToDomain());
+            CheckListItemModel resultModel = CheckListItemModel.FromDomain(checkListItem);
+            return Ok(resultModel);
+        }
+
+        /// <summary>
+        /// Update the provided check list item
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public IHttpActionResult UpdateCheckListItem(CheckListItemModel model)
+        {
+            List<string> validationMessages = model.ValidateUpdate();
+            if (validationMessages.Any())
+                return CreateErrorResponse(validationMessages);
+
+            CheckListItemEntity checkList = _checkListItemService.UpdateCheckListItem(model.ToDomain());
+            CheckListItemModel resultModel = CheckListItemModel.FromDomain(checkList);
+            return Ok(resultModel);
+        }
+
+        /// <summary>
+        /// Delete the provided check list item by id
+        /// </summary>
+        /// <param name="id"></param>
+        public IHttpActionResult DeleteCheckListItemById(int id)
+        {
+            if (id < 1)
+                return CreateErrorResponse("id must be greater than 0.");
+
+            _checkListItemService.DeleteCheckListItemById(id);
+
+            return Ok();
+        }
     }
 }

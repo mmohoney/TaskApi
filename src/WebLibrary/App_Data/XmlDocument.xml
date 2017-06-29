@@ -74,6 +74,26 @@
             <param name="id"></param>
             <returns></returns>
         </member>
+        <member name="M:WebLibrary.Areas.CheckLists.Controllers.CheckListItemController.CreateCheckListItem(WebLibrary.Areas.CheckLists.Models.CheckListItems.CheckListItemModel)">
+            <summary>
+            Create the provided check list item
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebLibrary.Areas.CheckLists.Controllers.CheckListItemController.UpdateCheckListItem(WebLibrary.Areas.CheckLists.Models.CheckListItems.CheckListItemModel)">
+            <summary>
+            Update the provided check list item
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebLibrary.Areas.CheckLists.Controllers.CheckListItemController.DeleteCheckListItemById(System.Int32)">
+            <summary>
+            Delete the provided check list item by id
+            </summary>
+            <param name="id"></param>
+        </member>
         <member name="M:WebLibrary.Areas.HelpPage.ApiDescriptionExtensions.GetFriendlyId(System.Web.Http.Description.ApiDescription)">
             <summary>
             Generates an URI-friendly ID for the <see cref="T:System.Web.Http.Description.ApiDescription"/>. E.g. "Get-Values-id_name" instead of "GetValues/{id}?name={name}"
@@ -550,6 +570,25 @@
             Initializes a new instance of the <see cref="T:WebLibrary.Areas.HelpPage.XmlDocumentationProvider"/> class.
             </summary>
             <param name="documentPath">The physical path to XML document.</param>
+        </member>
+        <member name="T:WebLibrary.Controllers.BaseApiController">
+            <summary>
+            Base api controller logic
+            </summary>
+        </member>
+        <member name="M:WebLibrary.Controllers.BaseApiController.CreateErrorResponse(System.String)">
+            <summary>
+            Return an error response with 400 code
+            </summary>
+            <param name="error"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebLibrary.Controllers.BaseApiController.CreateErrorResponse(System.Collections.Generic.List{System.String})">
+            <summary>
+            Return an error response with 400 code
+            </summary>
+            <param name="errors"></param>
+            <returns></returns>
         </member>
         <member name="T:WebLibrary.DependencyResolution.StructureMapDependencyScope">
             <summary>

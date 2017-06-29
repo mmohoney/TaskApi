@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Results;
 using Domain.CheckLists;
@@ -62,6 +59,70 @@ namespace WebLibrary.Test
             Assert.IsTrue(converted.Content.Id == 3);
         }
 
+        [Test]
+        public void CreateCheckListItem_Invalid()
+        {
+            var model = new CheckListItemModel() { Id = 1 };
+            var result = _controller.CreateCheckListItem(model);
+            var converted = (NegotiatedContentResult<List<string>>)result;
+            Assert.IsTrue(converted.StatusCode == HttpStatusCode.BadRequest);
+        }
+
+        [Test]
+        public void CreateCheckListItem_Valid()
+        {
+            var model = new CheckListItemModel()
+            {
+                Id = 0,
+                CheckListId = 1,
+                Description = "1",
+                DueDate = DateTime.Now.AddDays(7),
+                Active = true
+            };
+            var result = _controller.CreateCheckListItem(model);
+            var converted = (OkNegotiatedContentResult<CheckListItemModel>)result;
+            Assert.IsTrue(converted.Content.Id == 4);
+        }
+
+        [Test]
+        public void UpdateCheckListItem_Invalid()
+        {
+            var model = new CheckListItemModel() { Id = 0 };
+            var result = _controller.UpdateCheckListItem(model);
+            var converted = (NegotiatedContentResult<List<string>>)result;
+            Assert.IsTrue(converted.StatusCode == HttpStatusCode.BadRequest);
+        }
+
+        [Test]
+        public void UpdateCheckListItem_Valid()
+        {
+            var model = new CheckListItemModel()
+            {
+                Id = 5,
+                CheckListId = 1,
+                Description = "5",
+                Active = true
+            };
+            var result = _controller.UpdateCheckListItem(model);
+            var converted = (OkNegotiatedContentResult<CheckListItemModel>)result;
+            Assert.IsTrue(converted.Content.Id == 5);
+        }
+
+
+        [Test]
+        public void DeleteCheckListItemById_Invalid()
+        {
+            var result = _controller.DeleteCheckListItemById(0);
+            var converted = (NegotiatedContentResult<List<string>>)result;
+            Assert.IsTrue(converted.StatusCode == HttpStatusCode.BadRequest);
+        }
+
+        [Test]
+        public void DeleteCheckListItemById_Valid()
+        {
+            var result = _controller.DeleteCheckListItemById(1);
+            var converted = (OkResult)result;
+        }
 
         public class CheckListItemControllerTestsCheckListItemService : ICheckListItemService
         {
@@ -105,17 +166,24 @@ namespace WebLibrary.Test
 
             public CheckListItemEntity CreateCheckListItem(CheckListItemEntity checkListItem)
             {
-                throw new NotImplementedException();
+                checkListItem.Id = 4;
+                return checkListItem;
             }
 
-            public CheckListItemEntity UpdateCheckList(CheckListItemEntity checkListItem)
+            public CheckListItemEntity UpdateCheckListItem(CheckListItemEntity checkListItem)
             {
-                throw new NotImplementedException();
+                return new CheckListItemEntity()
+                {
+                    Id = 5,
+                    CheckListId = 1,
+                    Description = "Description",
+                    Active = true,
+                };
             }
 
             public void DeleteCheckListItemById(int id)
             {
-                throw new NotImplementedException();
+                
             }
         }
     }
