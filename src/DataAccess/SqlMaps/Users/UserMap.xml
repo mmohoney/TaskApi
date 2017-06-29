@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="UserMap" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
+
+  <resultMaps>
+    <resultMap id="UserResultMap" class="UserDto">
+      <result property="Id" column="ID"/>
+      <result property="Username" column="USERNAME"/>
+      <result property="FirstName" column="FIRST_NAME"/>
+      <result property="MiddleName" column="MIDDLE_NAME"/>
+      <result property="LastName" column="LAST_NAME"/>
+      <result property="Email" column="EMAIL"/>
+    </resultMap>
+  </resultMaps>
+  
+  <statements>
+    <select id="GetAllUsers" resultMap="UserResultMap" >
+      <![CDATA[
+        SELECT U.ID,
+               U.USERNAME,
+               U.FIRST_NAME,
+               U.MIDDLE_NAME,
+               U.LAST_NAME,
+               U.EMAIL
+        FROM USERS U
+      ]]>
+    </select>
+
+    <select id="GetUserById" parameterClass="int" resultMap="UserResultMap" >
+      <![CDATA[
+        SELECT U.ID,
+               U.USERNAME,
+               U.FIRST_NAME,
+               U.MIDDLE_NAME,
+               U.LAST_NAME,
+               U.EMAIL
+        FROM USERS U  
+       WHERE U.ID = #value#  
+      ]]>
+    </select>
+
+    <insert id="CreateUser" parameterClass="UserDto" >
+      <![CDATA[
+        INSERT INTO USERS (USERNAME, FIRST_NAME, MIDDLE_NAME, LAST_NAME, EMAIL)
+        VALUES (#Username#,
+                #FirstName#,
+                #MiddleName#,
+                #LastName#,
+                #Email#)
+      ]]>
+      <selectKey resultClass="int" type="post" property="Id" >
+        <![CDATA[
+          SELECT @@IDENTITY as value
+        ]]>
+      </selectKey>
+    </insert>
+  </statements>
+</sqlMap>

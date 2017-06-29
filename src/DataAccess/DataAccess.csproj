@@ -101,8 +101,12 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
+    <Compile Include="Implementations\BaseDao.cs" />
     <Compile Include="Implementations\CheckLists\CheckListDao.cs" />
     <Compile Include="Implementations\CheckLists\Interfaces\ICheckListDao.cs" />
+    <Compile Include="Implementations\IBaseDao.cs" />
+    <Compile Include="Implementations\Users\Interfaces\IUserDao.cs" />
+    <Compile Include="Implementations\Users\UserDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DataAccessRegistry.cs" />
     <Compile Include="USER.cs">
@@ -123,13 +127,9 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ERD.cs</LastGenOutput>
     </Content>
-    <Content Include="TaskDb.mdf">
+    <EmbeddedResource Include="SqlMaps\Users\UserMap.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TaskDb_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>TaskDb.mdf</DependentUpon>
-    </Content>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
