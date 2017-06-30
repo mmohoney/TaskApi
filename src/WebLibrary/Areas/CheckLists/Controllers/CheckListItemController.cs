@@ -29,6 +29,7 @@ namespace WebLibrary.Areas.CheckLists.Controllers
         /// </summary>
         /// <param name="checkListId"></param>
         /// <returns></returns>
+        [HttpGet]
         public IHttpActionResult GetAllCheckListItemsByCheckListId(int checkListId)
         {
             if (checkListId < 1)
@@ -44,6 +45,7 @@ namespace WebLibrary.Areas.CheckLists.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
+        [HttpGet]
         public IHttpActionResult GetCheckListItemById(int id)
         {
             if (id < 1)
@@ -59,6 +61,7 @@ namespace WebLibrary.Areas.CheckLists.Controllers
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
+        [HttpPost]
         public IHttpActionResult CreateCheckListItem(CheckListItemModel model)
         {
             List<string> validationMessages = model.ValidateCreate();
@@ -75,6 +78,7 @@ namespace WebLibrary.Areas.CheckLists.Controllers
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
+        [HttpPut]
         public IHttpActionResult UpdateCheckListItem(CheckListItemModel model)
         {
             List<string> validationMessages = model.ValidateUpdate();
@@ -90,6 +94,7 @@ namespace WebLibrary.Areas.CheckLists.Controllers
         /// Delete the provided check list item by id
         /// </summary>
         /// <param name="id"></param>
+        [HttpDelete]
         public IHttpActionResult DeleteCheckListItemById(int id)
         {
             if (id < 1)
