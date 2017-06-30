@@ -123,12 +123,8 @@
       <DependentUpon>TaskDb.mdf</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <EmbeddedResource Include="SqlMaps\CheckLists\CheckListItemMap.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SqlMaps\CheckLists\CheckListMap.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
+    <EmbeddedResource Include="SqlMaps\CheckLists\CheckListItemMap.xml" />
+    <EmbeddedResource Include="SqlMaps\CheckLists\CheckListMap.xml" />
     <Content Include="ERD.Context.tt">
       <DependentUpon>ERD.edmx</DependentUpon>
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -139,9 +135,7 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ERD.cs</LastGenOutput>
     </Content>
-    <EmbeddedResource Include="SqlMaps\Users\UserMap.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
+    <EmbeddedResource Include="SqlMaps\Users\UserMap.xml" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
@@ -156,11 +150,11 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="SqlMap.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <EmbeddedResource Include="providers.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <EmbeddedResource Include="Config\SqlMap.config">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Config\providers.config">
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="App.Config">
       <SubType>Designer</SubType>

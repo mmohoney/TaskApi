@@ -16,15 +16,24 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System.Web.Http;
+using StructureMap;
 using WebLibrary.DependencyResolution;
 
 [assembly: WebActivatorEx.PostApplicationStartMethod(typeof(WebLibrary.App_Start.StructuremapWebApi), "Start")]
 
 namespace WebLibrary.App_Start {
-    public static class StructuremapWebApi {
+    public static class StructuremapWebApi
+    {
+        public static IContainer Container;
+        public static StructureMapWebApiDependencyResolver Resolver;
+        public static HttpConfiguration HttpConfiguration;
+
         public static void Start() {
-			var container = StructuremapMvc.StructureMapDependencyScope.Container;
-            GlobalConfiguration.Configuration.DependencyResolver = new StructureMapWebApiDependencyResolver(container);
+            Container = StructuremapMvc.StructureMapDependencyScope.Container;
+            Resolver = new StructureMapWebApiDependencyResolver(Container);
+            HttpConfiguration = GlobalConfiguration.Configuration;
+
+            GlobalConfiguration.Configuration.DependencyResolver = Resolver;
         }
     }
 }

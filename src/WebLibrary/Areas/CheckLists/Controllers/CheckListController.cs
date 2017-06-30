@@ -31,6 +31,8 @@ namespace WebLibrary.Areas.CheckLists.Controllers
         /// <returns></returns>
         public IHttpActionResult GetAllCheckListsForUser(int userId)
         {
+            var test = Configuration.Services.GetApiExplorer().ApiDescriptions;
+
             if (userId < 1)
                 return CreateErrorResponse("userId must be greater than 0.");
 

@@ -1,6 +1,7 @@
 using System;
 using System.Web.Http;
 using System.Web.Mvc;
+using WebLibrary.App_Start;
 using WebLibrary.Areas.HelpPage.ModelDescriptions;
 using WebLibrary.Areas.HelpPage.Models;
 
@@ -20,7 +21,10 @@ namespace WebLibrary.Areas.HelpPage.Controllers
 
         public HelpController(HttpConfiguration config)
         {
-            Configuration = config;
+            //Configuration = config;
+
+            Configuration = StructuremapWebApi.HttpConfiguration;
+            Configuration.DependencyResolver = StructuremapWebApi.Resolver;
         }
 
         public HttpConfiguration Configuration { get; private set; }
@@ -28,6 +32,7 @@ namespace WebLibrary.Areas.HelpPage.Controllers
         public ActionResult Index()
         {
             ViewBag.DocumentationProvider = Configuration.Services.GetDocumentationProvider();
+
             var test = Configuration.Services.GetApiExplorer().ApiDescriptions;
             return View(test);
         }

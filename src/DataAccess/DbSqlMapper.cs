@@ -1,4 +1,7 @@
-﻿using IBatisNet.DataMapper;
+﻿using System.Xml;
+using IBatisNet.Common.Utilities;
+using IBatisNet.DataMapper;
+using IBatisNet.DataMapper.Configuration;
 
 namespace DataAccess
 {
@@ -17,7 +20,10 @@ namespace DataAccess
                     {
                         if (_sqlMapper == null)
                         {
-                            _sqlMapper = Mapper.Instance();
+                            DomSqlMapBuilder builder = new DomSqlMapBuilder();
+                            XmlDocument sqlMapConfig = Resources.GetEmbeddedResourceAsXmlDocument("Config.SqlMap.config, DataAccess");
+                            _sqlMapper = builder.Configure(sqlMapConfig);
+                            //_sqlMapper = Mapper.Instance();
                         }
                     }
                 }
