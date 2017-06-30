@@ -12,21 +12,15 @@ namespace DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class CHECK_LIST
+    public partial class CHECK_LIST_ITEM
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public CHECK_LIST()
-        {
-            this.CHECK_LIST_ITEM = new HashSet<CHECK_LIST_ITEM>();
-        }
-    
         public int ID { get; set; }
-        public int USER_ID { get; set; }
+        public int CHECK_LIST_ID { get; set; }
+        public bool IS_COMPLETE { get; set; }
         public string DESCRIPTION { get; set; }
+        public Nullable<System.DateTime> DUE_DATE { get; set; }
         public bool ACTIVE { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CHECK_LIST_ITEM> CHECK_LIST_ITEM { get; set; }
-        public virtual USER USER { get; set; }
+        public virtual CHECK_LIST CHECK_LIST { get; set; }
     }
 }

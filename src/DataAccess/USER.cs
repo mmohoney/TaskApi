@@ -25,10 +25,7 @@ namespace DataAccess
         public string FIRST_NAME { get; set; }
         public string MIDDLE_NAME { get; set; }
         public string LAST_NAME { get; set; }
-        public System.DateTime CREATED_TIMESTAMP { get; set; }
-        public int CREATED_USER_ID { get; set; }
-        public System.DateTime MODIFIED_TIMESTAMP { get; set; }
-        public int MODIFIED_USER_ID { get; set; }
+        public string EMAIL { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CHECK_LIST> CHECK_LIST { get; set; }

@@ -1,6 +1,4 @@
-﻿using System.Web;
-using System.Web.Mvc;
-using WebLibrary.Filters;
+﻿using System.Web.Mvc;
 
 namespace WebLibrary
 {
@@ -9,7 +7,6 @@ namespace WebLibrary
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());
-            //filters.Add(new UnhandledExceptionHandler());
         }
     }
 }

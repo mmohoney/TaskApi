@@ -1,6 +1,5 @@
 ﻿using System;
 using DataAccess.Implementations.Users;
-using DataTransfer.CheckLists;
 using DataTransfer.Users;
 using NUnit.Framework;
 

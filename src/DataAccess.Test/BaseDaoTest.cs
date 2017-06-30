@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Threading;
+using System.Threading.Tasks;
 using DataAccess.Implementations;
 using DataAccess.Implementations.Users;
 using IBatisNet.DataMapper;
@@ -21,6 +24,44 @@ namespace DataAccess.Test
         {
             Assert.IsNotNull(dao.Session);
             Assert.IsFalse(dao.Session.IsTransactionStart);
+        }
+
+        [Test]
+        public void ThreadSafeSession()
+        {
+            var dao = new UserDao();
+            Guid guidOne = new Guid(), guidTwo = new Guid();
+
+            var task1 = Task.Factory.StartNew(() =>
+            {
+                while (guidOne == new Guid() && guidTwo == new Guid())
+                {
+                    using (ISqlMapSession session = dao.StartSession())
+                    {
+                        var connectionInner = (SqlConnection)dao.Session.Connection;
+                        guidOne = connectionInner.ClientConnectionId;
+                    }
+
+                    Thread.Sleep(200);
+                }
+            });
+            var task2 = Task.Factory.StartNew(() =>
+            {
+                while (guidOne == new Guid() && guidTwo == new Guid())
+                {
+                    using (ISqlMapSession session = dao.StartSession())
+                    {
+                        var connectionInner = (SqlConnection)dao.Session.Connection;
+                        guidTwo = connectionInner.ClientConnectionId;
+                    }
+
+                    Thread.Sleep(200);
+                }
+            });
+
+            Task.WaitAll(new List<Task> {task1, task2}.ToArray());
+
+            Assert.AreNotEqual(guidOne, guidTwo);
         }
 
         [Test]

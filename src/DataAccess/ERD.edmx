@@ -11,30 +11,48 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="USER_ID" Type="int" Nullable="false" />
-          <Property Name="CREATED_TIMESTAMP" Type="datetime" Nullable="false" />
-          <Property Name="CREATED_USER_ID" Type="int" Nullable="false" />
-          <Property Name="MODIFIED_TIMESTAMP" Type="datetime" Nullable="false" />
-          <Property Name="MODIFIED_USER_ID" Type="int" Nullable="false" />
+          <Property Name="DESCRIPTION" Type="nchar" MaxLength="255" />
+          <Property Name="ACTIVE" Type="bit" Nullable="false" />
         </EntityType>
-        <EntityType Name="USER">
+        <EntityType Name="CHECK_LIST_ITEM">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CHECK_LIST_ID" Type="int" Nullable="false" />
+          <Property Name="IS_COMPLETE" Type="bit" Nullable="false" />
+          <Property Name="DESCRIPTION" Type="nchar" MaxLength="255" Nullable="false" />
+          <Property Name="DUE_DATE" Type="datetime" />
+          <Property Name="ACTIVE" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="USERS">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="USERNAME" Type="nchar" MaxLength="255" Nullable="false" />
           <Property Name="FIRST_NAME" Type="nchar" MaxLength="255" Nullable="false" />
-          <Property Name="MIDDLE_NAME" Type="nchar" MaxLength="255" Nullable="false" />
+          <Property Name="MIDDLE_NAME" Type="nchar" MaxLength="255" />
           <Property Name="LAST_NAME" Type="nchar" MaxLength="255" Nullable="false" />
-          <Property Name="CREATED_TIMESTAMP" Type="datetime" Nullable="false" />
-          <Property Name="CREATED_USER_ID" Type="int" Nullable="false" />
-          <Property Name="MODIFIED_TIMESTAMP" Type="datetime" Nullable="false" />
-          <Property Name="MODIFIED_USER_ID" Type="int" Nullable="false" />
+          <Property Name="EMAIL" Type="nchar" MaxLength="255" Nullable="false" />
         </EntityType>
-        <Association Name="FK_CHECK_LIST_ToTable">
-          <End Role="USER" Type="Self.USER" Multiplicity="1" />
+        <Association Name="FK_CHECK_LIST_ITEM_CHECK_LIST">
+          <End Role="CHECK_LIST" Type="Self.CHECK_LIST" Multiplicity="1" />
+          <End Role="CHECK_LIST_ITEM" Type="Self.CHECK_LIST_ITEM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CHECK_LIST">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CHECK_LIST_ITEM">
+              <PropertyRef Name="CHECK_LIST_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CHECK_LIST_USER">
+          <End Role="USERS" Type="Self.USERS" Multiplicity="1" />
           <End Role="CHECK_LIST" Type="Self.CHECK_LIST" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="USER">
+            <Principal Role="USERS">
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="CHECK_LIST">
@@ -44,9 +62,14 @@
         </Association>
         <EntityContainer Name="TaskDbModelStoreContainer">
           <EntitySet Name="CHECK_LIST" EntityType="Self.CHECK_LIST" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="USER" EntityType="Self.USER" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_CHECK_LIST_ToTable" Association="Self.FK_CHECK_LIST_ToTable">
-            <End Role="USER" EntitySet="USER" />
+          <EntitySet Name="CHECK_LIST_ITEM" EntityType="Self.CHECK_LIST_ITEM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USERS" EntityType="Self.USERS" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CHECK_LIST_ITEM_CHECK_LIST" Association="Self.FK_CHECK_LIST_ITEM_CHECK_LIST">
+            <End Role="CHECK_LIST" EntitySet="CHECK_LIST" />
+            <End Role="CHECK_LIST_ITEM" EntitySet="CHECK_LIST_ITEM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CHECK_LIST_USER" Association="Self.FK_CHECK_LIST_USER">
+            <End Role="USERS" EntitySet="USERS" />
             <End Role="CHECK_LIST" EntitySet="CHECK_LIST" />
           </AssociationSet>
         </EntityContainer>
@@ -54,36 +77,69 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TaskDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="TaskDbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CHECK_LIST" EntityType="TaskDbModel.CHECK_LIST" />
+          <EntitySet Name="CHECK_LIST_ITEM" EntityType="TaskDbModel.CHECK_LIST_ITEM" />
+          <EntitySet Name="USERS" EntityType="TaskDbModel.USER" />
+          <AssociationSet Name="FK_CHECK_LIST_ITEM_CHECK_LIST" Association="TaskDbModel.FK_CHECK_LIST_ITEM_CHECK_LIST">
+            <End Role="CHECK_LIST" EntitySet="CHECK_LIST" />
+            <End Role="CHECK_LIST_ITEM" EntitySet="CHECK_LIST_ITEM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CHECK_LIST_USER" Association="TaskDbModel.FK_CHECK_LIST_USER">
+            <End Role="USER" EntitySet="USERS" />
+            <End Role="CHECK_LIST" EntitySet="CHECK_LIST" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="CHECK_LIST">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="USER_ID" Type="Int32" Nullable="false" />
-          <Property Name="CREATED_TIMESTAMP" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CREATED_USER_ID" Type="Int32" Nullable="false" />
-          <Property Name="MODIFIED_TIMESTAMP" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="MODIFIED_USER_ID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="USER" Relationship="Self.FK_CHECK_LIST_ToTable" FromRole="CHECK_LIST" ToRole="USER" />
+          <Property Name="DESCRIPTION" Type="String" MaxLength="255" FixedLength="true" Unicode="true" />
+          <Property Name="ACTIVE" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="CHECK_LIST_ITEM" Relationship="TaskDbModel.FK_CHECK_LIST_ITEM_CHECK_LIST" FromRole="CHECK_LIST" ToRole="CHECK_LIST_ITEM" />
+          <NavigationProperty Name="USER" Relationship="TaskDbModel.FK_CHECK_LIST_USER" FromRole="CHECK_LIST" ToRole="USER" />
+        </EntityType>
+        <EntityType Name="CHECK_LIST_ITEM">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CHECK_LIST_ID" Type="Int32" Nullable="false" />
+          <Property Name="IS_COMPLETE" Type="Boolean" Nullable="false" />
+          <Property Name="DESCRIPTION" Type="String" Nullable="false" MaxLength="255" FixedLength="true" Unicode="true" />
+          <Property Name="DUE_DATE" Type="DateTime" Precision="3" />
+          <Property Name="ACTIVE" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="CHECK_LIST" Relationship="TaskDbModel.FK_CHECK_LIST_ITEM_CHECK_LIST" FromRole="CHECK_LIST_ITEM" ToRole="CHECK_LIST" />
         </EntityType>
         <EntityType Name="USER">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="USERNAME" Type="String" MaxLength="255" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="FIRST_NAME" Type="String" MaxLength="255" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="MIDDLE_NAME" Type="String" MaxLength="255" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="LAST_NAME" Type="String" MaxLength="255" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="CREATED_TIMESTAMP" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CREATED_USER_ID" Type="Int32" Nullable="false" />
-          <Property Name="MODIFIED_TIMESTAMP" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="MODIFIED_USER_ID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="CHECK_LIST" Relationship="Self.FK_CHECK_LIST_ToTable" FromRole="USER" ToRole="CHECK_LIST" />
+          <Property Name="USERNAME" Type="String" Nullable="false" MaxLength="255" FixedLength="true" Unicode="true" />
+          <Property Name="FIRST_NAME" Type="String" Nullable="false" MaxLength="255" FixedLength="true" Unicode="true" />
+          <Property Name="MIDDLE_NAME" Type="String" MaxLength="255" FixedLength="true" Unicode="true" />
+          <Property Name="LAST_NAME" Type="String" Nullable="false" MaxLength="255" FixedLength="true" Unicode="true" />
+          <Property Name="EMAIL" Type="String" Nullable="false" MaxLength="255" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="CHECK_LIST" Relationship="TaskDbModel.FK_CHECK_LIST_USER" FromRole="USER" ToRole="CHECK_LIST" />
         </EntityType>
-        <Association Name="FK_CHECK_LIST_ToTable">
-          <End Role="USER" Type="Self.USER" Multiplicity="1" />
-          <End Role="CHECK_LIST" Type="Self.CHECK_LIST" Multiplicity="*" />
+        <Association Name="FK_CHECK_LIST_ITEM_CHECK_LIST">
+          <End Type="TaskDbModel.CHECK_LIST" Role="CHECK_LIST" Multiplicity="1" />
+          <End Type="TaskDbModel.CHECK_LIST_ITEM" Role="CHECK_LIST_ITEM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CHECK_LIST">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CHECK_LIST_ITEM">
+              <PropertyRef Name="CHECK_LIST_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CHECK_LIST_USER">
+          <End Type="TaskDbModel.USER" Role="USER" Multiplicity="1" />
+          <End Type="TaskDbModel.CHECK_LIST" Role="CHECK_LIST" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="USER">
               <PropertyRef Name="ID" />
@@ -93,15 +149,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="TaskDbEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="CHECK_LIST" EntityType="Self.CHECK_LIST" />
-          <EntitySet Name="USERs" EntityType="Self.USER" />
-          <AssociationSet Name="FK_CHECK_LIST_ToTable" Association="Self.FK_CHECK_LIST_ToTable">
-            <End Role="USER" EntitySet="USERs" />
-            <End Role="CHECK_LIST" EntitySet="CHECK_LIST" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -110,27 +158,34 @@
           <EntitySetMapping Name="CHECK_LIST">
             <EntityTypeMapping TypeName="TaskDbModel.CHECK_LIST">
               <MappingFragment StoreEntitySet="CHECK_LIST">
-                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ACTIVE" ColumnName="ACTIVE" />
+                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
                 <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
-                <ScalarProperty Name="CREATED_TIMESTAMP" ColumnName="CREATED_TIMESTAMP" />
-                <ScalarProperty Name="CREATED_USER_ID" ColumnName="CREATED_USER_ID" />
-                <ScalarProperty Name="MODIFIED_TIMESTAMP" ColumnName="MODIFIED_TIMESTAMP" />
-                <ScalarProperty Name="MODIFIED_USER_ID" ColumnName="MODIFIED_USER_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="USERs">
-            <EntityTypeMapping TypeName="TaskDbModel.USER">
-              <MappingFragment StoreEntitySet="USER">
+          <EntitySetMapping Name="CHECK_LIST_ITEM">
+            <EntityTypeMapping TypeName="TaskDbModel.CHECK_LIST_ITEM">
+              <MappingFragment StoreEntitySet="CHECK_LIST_ITEM">
+                <ScalarProperty Name="ACTIVE" ColumnName="ACTIVE" />
+                <ScalarProperty Name="DUE_DATE" ColumnName="DUE_DATE" />
+                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+                <ScalarProperty Name="IS_COMPLETE" ColumnName="IS_COMPLETE" />
+                <ScalarProperty Name="CHECK_LIST_ID" ColumnName="CHECK_LIST_ID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
-                <ScalarProperty Name="FIRST_NAME" ColumnName="FIRST_NAME" />
-                <ScalarProperty Name="MIDDLE_NAME" ColumnName="MIDDLE_NAME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USERS">
+            <EntityTypeMapping TypeName="TaskDbModel.USER">
+              <MappingFragment StoreEntitySet="USERS">
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
                 <ScalarProperty Name="LAST_NAME" ColumnName="LAST_NAME" />
-                <ScalarProperty Name="CREATED_TIMESTAMP" ColumnName="CREATED_TIMESTAMP" />
-                <ScalarProperty Name="CREATED_USER_ID" ColumnName="CREATED_USER_ID" />
-                <ScalarProperty Name="MODIFIED_TIMESTAMP" ColumnName="MODIFIED_TIMESTAMP" />
-                <ScalarProperty Name="MODIFIED_USER_ID" ColumnName="MODIFIED_USER_ID" />
+                <ScalarProperty Name="MIDDLE_NAME" ColumnName="MIDDLE_NAME" />
+                <ScalarProperty Name="FIRST_NAME" ColumnName="FIRST_NAME" />
+                <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -85,6 +85,9 @@
     <Compile Include="CHECK_LIST.cs">
       <DependentUpon>ERD.tt</DependentUpon>
     </Compile>
+    <Compile Include="CHECK_LIST_ITEM.cs">
+      <DependentUpon>ERD.tt</DependentUpon>
+    </Compile>
     <Compile Include="DbSqlMapper.cs" />
     <Compile Include="ERD.Context.cs">
       <DependentUpon>ERD.Context.tt</DependentUpon>
@@ -116,15 +119,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="TaskDb.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TaskDb_log.ldf">
-      <DependentUpon>TaskDb.mdf</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <EmbeddedResource Include="SqlMaps\CheckLists\CheckListItemMap.xml" />
-    <EmbeddedResource Include="SqlMaps\CheckLists\CheckListMap.xml" />
     <Content Include="ERD.Context.tt">
       <DependentUpon>ERD.edmx</DependentUpon>
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -135,6 +129,15 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ERD.cs</LastGenOutput>
     </Content>
+    <Content Include="TaskDb.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TaskDb_log.ldf">
+      <DependentUpon>TaskDb.mdf</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <EmbeddedResource Include="SqlMaps\CheckLists\CheckListItemMap.xml" />
+    <EmbeddedResource Include="SqlMaps\CheckLists\CheckListMap.xml" />
     <EmbeddedResource Include="SqlMaps\Users\UserMap.xml" />
   </ItemGroup>
   <ItemGroup>

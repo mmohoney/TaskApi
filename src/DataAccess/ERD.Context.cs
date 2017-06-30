@@ -26,6 +26,7 @@ namespace DataAccess
         }
     
         public virtual DbSet<CHECK_LIST> CHECK_LIST { get; set; }
-        public virtual DbSet<USER> USERs { get; set; }
+        public virtual DbSet<CHECK_LIST_ITEM> CHECK_LIST_ITEM { get; set; }
+        public virtual DbSet<USER> USERS { get; set; }
     }
 }

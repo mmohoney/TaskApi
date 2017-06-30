@@ -3,7 +3,6 @@ using DataAccess.Implementations.CheckLists;
 using DataAccess.Implementations.Users;
 using DataTransfer.CheckLists;
 using DataTransfer.Users;
-using IBatisNet.DataMapper;
 using NUnit.Framework;
 
 namespace DataAccess.Test

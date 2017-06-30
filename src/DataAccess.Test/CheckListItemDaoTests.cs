@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DataAccess.Implementations.CheckLists;
 using DataAccess.Implementations.Users;
 using DataTransfer.CheckLists;
 using DataTransfer.Users;
-using NUnit.Framework.Internal;
 using NUnit.Framework;
 
 namespace DataAccess.Test

@@ -5,9 +5,11 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="2d475d19bb4047b285f8251ee4b96fb9" Name="Diagram1">
-        <EntityTypeShape EntityType="TaskDbModel.CHECK_LIST" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="TaskDbModel.USER" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
-        <AssociationConnector Association="TaskDbModel.FK_CHECK_LIST_ToTable" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="TaskDbModel.CHECK_LIST" Width="1.5" PointX="3" PointY="1" />
+        <EntityTypeShape EntityType="TaskDbModel.CHECK_LIST_ITEM" Width="1.5" PointX="5.25" PointY="1" />
+        <EntityTypeShape EntityType="TaskDbModel.USER" Width="1.5" PointX="0.75" PointY="1" />
+        <AssociationConnector Association="TaskDbModel.FK_CHECK_LIST_ITEM_CHECK_LIST" />
+        <AssociationConnector Association="TaskDbModel.FK_CHECK_LIST_USER" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
